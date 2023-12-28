@@ -8,6 +8,7 @@ class UserEntity extends Equatable {
   final String? username;
   final String? name;
   final String? bio;
+  final String? university;
   final String? website;
   final String? email;
   final String? profileUrl;
@@ -20,12 +21,13 @@ class UserEntity extends Equatable {
   final String? password;
   final String? otherUid;
 
-  UserEntity({
+  const UserEntity( {
     this.imageFile,
     this.uid,
     this.username,
     this.name,
     this.bio,
+    this.university,
     this.website,
     this.email,
     this.profileUrl,
@@ -42,6 +44,7 @@ class UserEntity extends Equatable {
     username,
     name,
     bio,
+    university,
     website,
     email,
     profileUrl,

@@ -28,7 +28,7 @@ class _NetworkPageState extends State<NetworkPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Manage my network",
+                    "Connections",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -92,8 +92,8 @@ class _NetworkPageState extends State<NetworkPage> {
               itemCount: 20,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 6,
-                  crossAxisSpacing: 6,
+                  mainAxisSpacing: 3,
+                  crossAxisSpacing: 3,
                   childAspectRatio: 0.6),
               itemBuilder: (context, index) {
 

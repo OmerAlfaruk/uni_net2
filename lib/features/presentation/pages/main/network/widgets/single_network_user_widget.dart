@@ -49,14 +49,14 @@ class _SingleNetworkUserWidgetState extends State<SingleNetworkUserWidget> {
                   children: [
                     const Icon(Icons.group),
                     const SizedBox(width: 10,),
-                    Expanded(child: Text(" mutual connections", maxLines: 2, overflow: TextOverflow.ellipsis,  style: Theme.of(context).textTheme.labelLarge,))
+                    Expanded(child: Text(" mutual connections", maxLines: 2, overflow: TextOverflow.ellipsis,  style: Theme.of(context).textTheme.labelSmall,))
                   ],
                 ),
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 10,),
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
+
                   width: double.infinity,
                   height: 40,
                   decoration: BoxDecoration(

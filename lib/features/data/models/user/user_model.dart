@@ -7,6 +7,7 @@ class UserModel extends UserEntity {
   final String? username;
   final String? name;
   final String? bio;
+  final String? university;
   final String? website;
   final String? email;
   final String? profileUrl;
@@ -19,6 +20,7 @@ class UserModel extends UserEntity {
     this.username,
     this.name,
     this.bio,
+    this.university,
     this.website,
     this.email,
     this.profileUrl,
@@ -33,6 +35,7 @@ class UserModel extends UserEntity {
     website: website,
     connections: connections,
     bio: bio,
+    university:university,
     name: name,
     email: email,
     totalPosts: totalPosts,
@@ -49,6 +52,7 @@ class UserModel extends UserEntity {
       totalConnection: snapshot['totalConnection'],
       totalPosts: snapshot['totalPosts'],
       uid: snapshot['uid'],
+      university:snapshot['university'],
       website: snapshot['website'],
       profileUrl: snapshot['profileUrl'],
       connections: List.from(snap.get("connections")),
@@ -64,6 +68,7 @@ class UserModel extends UserEntity {
     "totalPosts": totalPosts,
     "website": website,
     "bio": bio,
+    "university":university,
     "profileUrl": profileUrl,
     "connections": connections,
   };

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uni_link/constant/color.dart';
 
+
 class FormContainerWidget extends StatefulWidget {
 
   final TextEditingController? controller;
@@ -13,6 +14,7 @@ class FormContainerWidget extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onFieldSubmitted;
   final TextInputType? inputType;
+  final IconData? prefixIcon;
 
   const FormContainerWidget({
     this.controller,
@@ -24,7 +26,7 @@ class FormContainerWidget extends StatefulWidget {
     this.onSaved,
     this.validator,
     this.onFieldSubmitted,
-    this.inputType
+    this.inputType, this.prefixIcon
   });
 
 
@@ -39,28 +41,28 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    bool isDak=MediaQuery.of(context).platformBrightness==Brightness.dark;
-
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: isDak?Colors.grey[700]:Colors.grey[200],
-        borderRadius: BorderRadius.circular(3),
+
+        borderRadius: BorderRadius.circular(10),
       ),
-      child: new TextFormField(
-        style: TextStyle(color: oPrimaryColor),
+      child: TextFormField(
+
         controller: widget.controller,
         keyboardType: widget.inputType,
         key: widget.fieldKey,
         obscureText: widget.isPasswordField == true? _obscureText : false,
         onSaved: widget.onSaved,
         validator: widget.validator,
+
         onFieldSubmitted: widget.onFieldSubmitted,
-        decoration: new InputDecoration(
+        decoration: InputDecoration(
+          prefixIcon: Icon(widget.prefixIcon),
           border: InputBorder.none,
           filled: true,
           hintText: widget.hintText,
-          hintStyle: TextStyle(color: Colors.grey[700]),
+          hintStyle: TextStyle(),
           suffixIcon: new GestureDetector(
             onTap: () {
               setState(() {
@@ -68,7 +70,7 @@ class _FormContainerWidgetState extends State<FormContainerWidget> {
               });
             },
             child:
-            widget.isPasswordField==true? Icon(_obscureText ? Icons.visibility_off : Icons.visibility, color: _obscureText == false ? oPrimaryColor : Colors.grey[700],) : Text(""),
+            widget.isPasswordField==true? Icon(_obscureText ? Icons.visibility_off : Icons.visibility, color: _obscureText == false ? oPrimaryColor : oSecondaryColor,) : Text(""),
           ),
         ),
       ),

@@ -1,16 +1,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uni_link/features/presentation/pages/main/event_screen/event_detail_page.dart';
 
-import '../event_screen/event_detail_page.dart';
-class NotificationsPage extends StatefulWidget {
-  const NotificationsPage({super.key});
+import '../event_screen/event_page.dart';
+class EventPage extends StatefulWidget {
+  const EventPage({super.key});
 
   @override
-  State<NotificationsPage> createState() => _NotificationsPageState();
+  State<EventPage> createState() => _EventPageState();
 }
 
-class _NotificationsPageState extends State<NotificationsPage> {
+class _EventPageState extends State<EventPage> {
 
   int _selectedCategoryIndex = 0;
   @override
@@ -28,8 +29,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 color: Colors.grey,
               ),
               ListView.builder(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),shrinkWrap: true, physics: const ScrollPhysics(),itemCount: 15,itemBuilder: (context, index) {
-                return GestureDetector(child:_singleNotificationWidget(),onTap:(){
-                 // Get.to(()=>const EventPage());
+                return GestureDetector(child:_singleEventWidget(),onTap:(){
+                   Get.to(()=>const EventDetailPage());
                 });
               })
             ],
@@ -54,7 +55,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     );
   }
 
-  _singleNotificationWidget() {
+  _singleEventWidget() {
     return Container(
       width: double.infinity,
       height: 80,
@@ -74,9 +75,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Omer Kamil", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  Text("Username", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  SizedBox(height: 2,),Text("Event Name", style: TextStyle(fontSize: 14),),
                   SizedBox(height: 2,),
-                  Text("commented on your post - check out", style: TextStyle(color: Colors.grey),)
+                  Text("05-01-2024", style: TextStyle(color: Colors.grey),),
                 ],
               ),
             ],
@@ -94,3 +96,5 @@ class _NotificationsPageState extends State<NotificationsPage> {
     );
   }
 }
+
+

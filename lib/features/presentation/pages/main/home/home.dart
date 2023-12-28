@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:uni_link/features/presentation/pages/main/home/widget/single_post.dart';
 import 'package:uni_link/features/presentation/widgets/appbar_widget.dart';
-
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return  SafeArea(
