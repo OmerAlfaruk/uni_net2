@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:uni_link/features/domain/entities/post/post_entity.dart';
 import 'package:uni_link/features/domain/entities/user/user_entity.dart';
+
+import '../entities/comment/comment_entity.dart';
 
 abstract class FirebaseRepository {
   // Credential Features
@@ -18,4 +21,19 @@ abstract class FirebaseRepository {
 
   // cloud storage
   Future<String> uploadImageToStorage(File? file,bool isPost,String childName);
+
+  // Post Features
+  Future<void> createPost(PostEntity post);
+  Stream<List<PostEntity>> readPosts(PostEntity post);
+  Stream<List<PostEntity>> readSinglePost(String postId);
+  Future<void> updatePost(PostEntity post);
+  Future<void> deletePost(PostEntity post);
+  Future<void> likePost(PostEntity post);
+
+  // Comment Features
+  Future<void> createComment(CommentEntity comment);
+  Stream<List<CommentEntity>> readComments(String postId);
+  Future<void> updateComment(CommentEntity comment);
+  Future<void> deleteComment(CommentEntity comment);
+  Future<void> likeComment(CommentEntity comment);
 }

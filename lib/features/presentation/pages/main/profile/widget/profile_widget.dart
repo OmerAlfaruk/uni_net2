@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uni_link/common_widget/profile_widget/profile_widget.dart';
 import 'package:uni_link/constant/image_string.dart';
 import 'package:uni_link/features/domain/entities/user/user_entity.dart';
 
@@ -20,93 +21,94 @@ class _ProfileMainWidgetState extends State<ProfileMainWidget> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Image.asset(profileImage),
-                  ),
+            Center(
+              child: SizedBox(
+                width: 150,
+                height: 150,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(75),
+                  child: profileWidget(imageUrl: widget.currentUser.profileUrl),
                 ),
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          "${widget.currentUser.totalPosts}",
-                          style: TextStyle(
-                              color: oPrimaryColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Posts",
-                          style: TextStyle(color: oPrimaryColor),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Column(
-                        children: [
-                          Text(
-                            "${widget.currentUser.totalConnection}",
-                            style: TextStyle(
-                                color: oPrimaryColor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            "Connections",
-                            style: TextStyle(color: oPrimaryColor),
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 25,
-                    ),
-                  ],
-                )
-              ],
+              ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 20,
             ),
             Text(
-              "${widget.currentUser.username}",
-              style:
-                  TextStyle(color: oPrimaryColor, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "${widget.currentUser.university}",
-              style: TextStyle(color: oPrimaryColor),
+              "From ${widget.currentUser.university}",
+        style:Theme.of(context).textTheme.headlineSmall!.apply(color: oPrimaryColor),
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
               "${widget.currentUser.bio}",
-              style: TextStyle(color: oPrimaryColor),
+                style:Theme.of(context).textTheme.headlineSmall!.apply(color: oPrimaryColor)
             ),
             const SizedBox(
               height: 10,
             ),
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  width: 50,
+                ),
+                Column(
+
+                  children: [
+                    Text(
+                      "${widget.currentUser.totalPosts}",
+                      style: TextStyle(
+                          color: oPrimaryColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Posts",
+                      style: TextStyle(color: oPrimaryColor),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  width: 50,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Column(
+                    children: [
+                      Text(
+                        "${widget.currentUser.totalConnection}",
+                        style: TextStyle(
+                            color: oPrimaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        "Connections",
+                        style: TextStyle(color: oPrimaryColor),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 25,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 30,
+            ),
+
+
             GridView.builder(
                 itemCount: 32,
                 physics: const ScrollPhysics(),

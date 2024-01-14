@@ -7,7 +7,7 @@ import 'package:uni_link/features/presentation/cubit/user/get_single_user/get_si
 import 'package:uni_link/features/presentation/pages/main/home/home.dart';
 import 'package:uni_link/features/presentation/pages/main/network/network.dart';
 import 'package:uni_link/features/presentation/pages/main/notifications/notifications.dart';
-import 'package:uni_link/features/presentation/pages/main/post/post.dart';
+import 'package:uni_link/features/presentation/pages/main/post/upload_post.dart';
 import 'package:uni_link/features/presentation/pages/main/profile/profile.dart';
 import 'package:uni_link/features/presentation/pages/main/search/search.dart';
 
@@ -105,7 +105,7 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 HomePage(),
                 SearchPage(),
-                Post(),
+                UploadPostPage(currentUser: currentUser,),
                 NetworkPage(),
                 ProfilePage(currentUser: currentUser,)
               ],

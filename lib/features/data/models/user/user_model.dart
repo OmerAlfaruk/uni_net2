@@ -14,8 +14,12 @@ class UserModel extends UserEntity {
   final List? connections;
   final num? totalConnection;
   final num? totalPosts;
+  final String? department;
+  final String? role;
 
-  UserModel({
+  UserModel( {
+    this.department,
+    this.role,
     this.uid,
     this.username,
     this.name,
@@ -33,10 +37,11 @@ class UserModel extends UserEntity {
     username: username,
     profileUrl: profileUrl,
     website: website,
+    department: department,
+    role: role,
     connections: connections,
     bio: bio,
     university:university,
-    name: name,
     email: email,
     totalPosts: totalPosts,
   );
@@ -48,6 +53,8 @@ class UserModel extends UserEntity {
       email: snapshot['email'],
       name: snapshot['name'],
       bio: snapshot['bio'],
+      department: snapshot['department'],
+      role: snapshot['role'],
       username: snapshot['username'],
       totalConnection: snapshot['totalConnection'],
       totalPosts: snapshot['totalPosts'],
@@ -68,6 +75,8 @@ class UserModel extends UserEntity {
     "totalPosts": totalPosts,
     "website": website,
     "bio": bio,
+    "role":role,
+    "department":department,
     "university":university,
     "profileUrl": profileUrl,
     "connections": connections,

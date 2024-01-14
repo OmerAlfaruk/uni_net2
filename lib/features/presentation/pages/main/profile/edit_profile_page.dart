@@ -1,10 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:uni_link/common_widget/profile_widget/profile_widget.dart';
+import 'package:uni_link/constant/color.dart';
+import 'package:uni_link/constant/const.dart';
+import 'package:uni_link/features/domain/entities/user/user_entity.dart';
+import 'package:uni_link/features/domain/use_cases/storage/upload_image_to_storage_use_case.dart';
+import 'package:uni_link/features/presentation/cubit/user/user_cubit.dart';
 import 'package:uni_link/features/presentation/pages/main/profile/widget/profile_form_widget.dart';
+import 'package:uni_link/injection_container.dart' as di;
 
 class EditProfilePage extends StatefulWidget {
+  final UserEntity currentUser;
 
-  const EditProfilePage({Key? key,}) : super(key: key);
+  const EditProfilePage({Key? key, required this.currentUser,}) : super(key: key);
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -12,22 +23,25 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController? _nameController;
-  TextEditingController? _usernameController;
   TextEditingController? _websiteController;
   TextEditingController? _bioController;
+  TextEditingController? _universityController;
+  TextEditingController? _departmentController;
+  TextEditingController? _roleController;
 
   @override
   void initState() {
-    _nameController = TextEditingController();
-    _usernameController =
-        TextEditingController();
-    _websiteController =
-        TextEditingController();
-    _bioController = TextEditingController();
+    _nameController = TextEditingController(text: widget.currentUser.username);
+    _websiteController = TextEditingController(text: widget.currentUser.website);
+    _bioController = TextEditingController(text: widget.currentUser.bio);
+    _universityController = TextEditingController(text: widget.currentUser.university);
+    _departmentController = TextEditingController(text: widget.currentUser.department);
+    _roleController = TextEditingController(text: widget.currentUser.role);
+
     super.initState();
   }
 
-  bool _isUpdating = false;
+
 
 
   @override
@@ -50,7 +64,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: GestureDetector(
-              onTap: (){},
+              onTap:
+                _updateUserProfileData
+                ,
               child: const Icon(
                 Icons.done,
                 color: Colors.blue,
@@ -65,21 +81,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: 15,),
               Center(
                 child: Container(
                   width: 100,
                   height: 100,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(50),
-                    child: profileWidget(),
+                    child: profileWidget(imageUrl: widget.currentUser.profileUrl),
                   ),
                 ),
               ),
               SizedBox(height: 15,),
               Center(
                 child: GestureDetector(
-                  onTap: () {},
-                  child: Text(
+                  onTap: selectImage,
+                  child: const Text(
                     "Change profile photo",
                     style: TextStyle(color: Colors.blue,
                         fontSize: 20,
@@ -87,27 +104,95 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               ProfileFormWidget(title: "Name", controller: _nameController),
-              SizedBox(height: 10,),
-              ProfileFormWidget(
-                  title: "Username", controller: _usernameController),
-              SizedBox(height: 5,),
+              const SizedBox(height: 5,),
               ProfileFormWidget(
                   title: "Website", controller: _websiteController),
-              SizedBox(height: 5,),
-              ProfileFormWidget(title: "Bio", controller: _bioController),
-              SizedBox(height: 5,),
-              ProfileFormWidget(title: "Bio", controller: _bioController),
-              SizedBox(height: 5,),
-              ProfileFormWidget(title: "Bio", controller: _bioController),
-              SizedBox(height: 5,),
-              ProfileFormWidget(title: "Bio", controller: _bioController),
-              SizedBox(height: 5,),
+              const SizedBox(height: 5,),
+              ProfileFormWidget(title: "University", controller: _universityController),
+              const SizedBox(height: 5,),
+              ProfileFormWidget(title: "Department", controller: _departmentController),
+              const SizedBox(height: 5,),
+              ProfileFormWidget(title: "Role", controller: _roleController),
+              const SizedBox(height: 5,),
+              ProfileFormWidget(title: "bio", controller: _bioController),
+              const SizedBox(height: 15,),
+              _isUpdating == true?Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Please wait...", style: TextStyle(color: oPrimaryColor),),
+                  sizeHor(10),
+                  CircularProgressIndicator()
+                ],
+              ) : Container(width: 0, height: 0,)
+
+
             ],
           ),
         ),
       ),
     );
+  }
+  bool _isUpdating = false;
+
+  File? _image;
+
+
+  Future selectImage() async {
+    try {
+      final pickedFile = await ImagePicker.platform.getImage(source: ImageSource.gallery);
+
+      setState(() {
+        if (pickedFile != null) {
+          _image = File(pickedFile.path);
+        } else {
+          print("no image has been selected");
+        }
+      });
+
+    } catch(e) {
+      toast("some error occured $e");
+    }
+  }
+
+  _updateUserProfileData() {
+    setState(() => _isUpdating = true);
+    if (_image == null) {
+      _updateUserProfile("");
+    } else {
+      di.sl<UploadImageToStorageUseCase>().call(_image!, false, "profileImages").then((profileUrl) {
+        _updateUserProfile(profileUrl);
+      });
+    }
+  }
+
+  _updateUserProfile(String profileUrl) {
+
+    BlocProvider.of<UserCubit>(context).updateUser(
+        user: UserEntity(
+            uid: widget.currentUser.uid,
+            bio: _bioController!.text,
+            website: _websiteController!.text,
+            username: _nameController!.text,
+            department: _departmentController!.text,
+            role: _roleController!.text,
+            university: _universityController!.text,
+            profileUrl: profileUrl
+        )
+    ).then((value) => _clear());
+  }
+
+  _clear() {
+    setState(() {
+      _isUpdating = false;
+      _bioController!.clear();
+      _websiteController!.clear();
+      _nameController!.clear();
+      _universityController!.clear();
+      _departmentController!.clear();
+      _roleController!.clear();
+    });
+    Navigator.pop(context);
   }
 }

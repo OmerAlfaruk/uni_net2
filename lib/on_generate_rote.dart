@@ -14,7 +14,7 @@ class OnGenerateRoute {
     switch(settings.name) {
       case PageConst.editProfilePage: {
         if (args is UserEntity) {
-          return routeBuilder(EditProfilePage());
+          return routeBuilder(EditProfilePage(currentUser:args,));
 
         } else {
           return routeBuilder(NoPageFound());

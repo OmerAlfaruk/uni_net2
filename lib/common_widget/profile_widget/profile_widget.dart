@@ -6,7 +6,7 @@ import 'package:uni_link/constant/image_string.dart';
 
 Widget profileWidget({String? imageUrl,File? image}) {
   if(image==null){
-    if(imageUrl==null || imageUrl ==""){
+    if(imageUrl==null || imageUrl == ""){
       return Image.asset('assets/images/profile/profile.png',
       fit: BoxFit.cover,);
 

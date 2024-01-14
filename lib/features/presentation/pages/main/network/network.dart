@@ -85,16 +85,11 @@ class _NetworkPageState extends State<NetworkPage> {
 
 
 
-            GridView.builder(
+            ListView.builder(
+              itemCount: 20,
+              physics: ScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 10),
               shrinkWrap: true,
-              physics: const ScrollPhysics(),
-              itemCount: 20,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 3,
-                  crossAxisSpacing: 3,
-                  childAspectRatio: 0.6),
               itemBuilder: (context, index) {
 
                 return const SingleNetworkUserWidget();

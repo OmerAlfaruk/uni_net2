@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 import 'dart:io';
 
@@ -7,18 +7,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uni_link/constant/const.dart';
 import 'package:uni_link/features/data/data_sources/firebase_remote_data_src.dart';
+import 'package:uni_link/features/data/models/post/post_model.dart';
 import 'package:uni_link/features/data/models/user/user_model.dart';
+import 'package:uni_link/features/domain/entities/comment/comment_entity.dart';
+import 'package:uni_link/features/domain/entities/post/post_entity.dart';
 import 'package:uni_link/features/domain/entities/user/user_entity.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
+
+import '../models/comment/comment_model.dart';
 
 class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource{
 
   final FirebaseFirestore firebaseFirestore;
   final FirebaseAuth firebaseAuth;
+  final FirebaseStorage firebaseStorage;
 
 
-  FirebaseRemoteDataSourceImpl({ required this.firebaseFirestore, required this.firebaseAuth});
+  FirebaseRemoteDataSourceImpl( {required this.firebaseStorage, required this.firebaseFirestore, required this.firebaseAuth});
 
   //create User with image
   Future<void> createUserWithImage(UserEntity user, String profileUrl) async {
@@ -29,7 +34,6 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource{
     userCollection.doc(uid).get().then((userDoc) {
       final newUser = UserModel(
           uid: uid,
-          name: user.name,
           email: user.email,
           bio: user.bio,
           connections: user.connections,
@@ -60,7 +64,6 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource{
     userCollection.doc(uid).get().then((userDoc) {
       final newUser = UserModel(
           uid: uid,
-          name: user.name,
           email: user.email,
           bio: user.bio,
           connections: user.connections,
@@ -102,10 +105,12 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource{
   Future<bool> isSignIn() async => firebaseAuth.currentUser?.uid != null;
 
   @override
-  Future<void> signInUser(UserEntity user)async {
+  Future signInUser(UserEntity user)async {
     try {
       if (user.email!.isNotEmpty || user.password!.isNotEmpty) {
-        await firebaseAuth.signInWithEmailAndPassword(email: user.email!, password: user.password!);
+        UserCredential result=await firebaseAuth.signInWithEmailAndPassword(email: user.email!, password: user.password!);
+        User? firebaseUser = result.user;
+        return firebaseUser;
       } else {
         print("fields cannot be empty");
       }
@@ -128,9 +133,15 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource{
     try {
       await firebaseAuth.createUserWithEmailAndPassword(email: user.email!, password: user.password!).then((currentUser) async{
         if (currentUser.user?.uid != null) {
-
-              createUser(user);
-      }});
+          if (user.imageFile != null) {
+            uploadImageToStorage(user.imageFile, false, "profileImages").then((profileUrl) {
+              createUserWithImage(user, profileUrl);
+            });
+          } else {
+            createUserWithImage(user, "");
+          }
+        }
+      });
       return;
     } on FirebaseAuthException catch (e) {
       if (e.code == "email-already-in-use") {
@@ -155,7 +166,7 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource{
     if (user.bio != "" && user.bio != null) userInformation['bio'] = user.bio;
     if (user.university != "" && user.university != null) userInformation['bio'] = user.university;
 
-    if (user.name != "" && user.name != null) userInformation['name'] = user.name;
+
 
     if (user.totalConnection != null) userInformation['totalConnection'] = user.totalConnection;
 
@@ -167,7 +178,7 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource{
   @override
   Future<String> uploadImageToStorage(File? file, bool isPost, String childName) async {
 
-   Reference ref = FirebaseStorage.instance.ref().child(childName).child(firebaseAuth.currentUser!.uid);
+   Reference ref = firebaseStorage.ref().child(childName).child(firebaseAuth.currentUser!.uid);
 
     if (isPost) {
       String id = Uuid().v1();
@@ -180,5 +191,223 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource{
 
     return await imageUrl;
   }
+
+  @override
+  Future<void> createPost(PostEntity post) async {
+    final postCollection = firebaseFirestore.collection(FirebaseConst.posts);
+
+    final newPost = PostModel(
+        userProfileUrl: post.userProfileUrl,
+        username: post.username,
+        totalLikes: 0,
+        totalComments: 0,
+        postImageUrl: post.postImageUrl,
+        postId: post.postId,
+        likes: [],
+        description: post.description,
+        creatorUid: post.creatorUid,
+        createAt: post.createAt
+    ).toJson();
+
+    try {
+
+      final postDocRef = await postCollection.doc(post.postId).get();
+
+      if (!postDocRef.exists) {
+        postCollection.doc(post.postId).set(newPost).then((value) {
+          final userCollection = firebaseFirestore.collection(FirebaseConst.users).doc(post.creatorUid);
+
+          userCollection.get().then((value) {
+            if (value.exists) {
+              final totalPosts = value.get('totalPosts');
+              userCollection.update({"totalPosts": totalPosts + 1});
+              return;
+            }
+          });
+        });
+      } else {
+        postCollection.doc(post.postId).update(newPost);
+      }
+    }catch (e) {
+      print("some error occured $e");
+    }
+  }
+
+  @override
+  Future<void> deletePost(PostEntity post) async {
+    final postCollection = firebaseFirestore.collection(FirebaseConst.posts);
+
+    try {
+      postCollection.doc(post.postId).delete().then((value) {
+        final userCollection = firebaseFirestore.collection(FirebaseConst.users).doc(post.creatorUid);
+
+        userCollection.get().then((value) {
+          if (value.exists) {
+            final totalPosts = value.get('totalPosts');
+            userCollection.update({"totalPosts": totalPosts - 1});
+            return;
+          }
+        });
+      });
+    } catch (e) {
+      print("some error occurred $e");
+    }
+  }
+
+  @override
+  Future<void> likePost(PostEntity post) async {
+    final postCollection = firebaseFirestore.collection(FirebaseConst.posts);
+    final currentUid = await getCurrentUid();
+    final postRef = await postCollection.doc(post.postId).get();
+
+    if (postRef.exists) {
+      List likes = postRef.get("likes");
+      final totalLikes = postRef.get("totalLikes");
+      if (likes.contains(currentUid)) {
+        postCollection.doc(post.postId).update({
+          "likes": FieldValue.arrayRemove([currentUid]),
+          "totalLikes": totalLikes - 1
+        });
+      } else {
+        postCollection.doc(post.postId).update({
+          "likes": FieldValue.arrayUnion([currentUid]),
+          "totalLikes": totalLikes + 1
+        });
+      }
+    }
+  }
+
+  @override
+  Stream<List<PostEntity>> readPosts(PostEntity post) {
+    final postCollection = firebaseFirestore.collection(FirebaseConst.posts).orderBy("createAt", descending: true);
+    return postCollection.snapshots().map((querySnapshot) => querySnapshot.docs.map((e) => PostModel.fromSnapshot(e)).toList());
+  }
+
+  @override
+  Stream<List<PostEntity>> readSinglePost(String postId) {
+    final postCollection = firebaseFirestore.collection(FirebaseConst.posts).orderBy("createAt", descending: true).where("postId", isEqualTo: postId);
+    return postCollection.snapshots().map((querySnapshot) => querySnapshot.docs.map((e) => PostModel.fromSnapshot(e)).toList());
+  }
+
+  @override
+  Future<void> updatePost(PostEntity post) async {
+    final postCollection = firebaseFirestore.collection(FirebaseConst.posts);
+    Map<String, dynamic> postInfo = Map();
+
+    if (post.description != "" && post.description != null) postInfo['description'] = post.description;
+    if (post.postImageUrl != "" && post.postImageUrl != null) postInfo['postImageUrl'] = post.postImageUrl;
+
+    postCollection.doc(post.postId).update(postInfo);
+  }
+
+
+  @override
+  Future<void> createComment(CommentEntity comment) async {
+    final commentCollection = firebaseFirestore.collection(FirebaseConst.posts).doc(comment.postId).collection(FirebaseConst.comment);
+
+    final newComment = CommentModel(
+        userProfileUrl: comment.userProfileUrl,
+        username: comment.username,
+        totalReplays: comment.totalReplays,
+        commentId: comment.commentId,
+        postId: comment.postId,
+        likes: [],
+        description: comment.description,
+        creatorUid: comment.creatorUid,
+        createAt: comment.createAt
+    ).toJson();
+
+    try {
+
+      final commentDocRef = await commentCollection.doc(comment.commentId).get();
+
+      if (!commentDocRef.exists) {
+        commentCollection.doc(comment.commentId).set(newComment).then((value) {
+
+          final postCollection = firebaseFirestore.collection(FirebaseConst.posts).doc(comment.postId);
+
+          postCollection.get().then((value) {
+            if (value.exists) {
+              final totalComments = value.get('totalComments');
+              postCollection.update({"totalComments": totalComments + 1});
+              return;
+            }
+          });
+        });
+      } else {
+        commentCollection.doc(comment.commentId).update(newComment);
+      }
+
+
+    } catch (e) {
+      print("some error occured $e");
+    }
+
+  }
+
+  @override
+  Future<void> deleteComment(CommentEntity comment) async {
+    final commentCollection = firebaseFirestore.collection(FirebaseConst.posts).doc(comment.postId).collection(FirebaseConst.comment);
+
+    try {
+      commentCollection.doc(comment.commentId).delete().then((value) {
+        final postCollection = firebaseFirestore.collection(FirebaseConst.posts).doc(comment.postId);
+
+        postCollection.get().then((value) {
+          if (value.exists) {
+            final totalComments = value.get('totalComments');
+            postCollection.update({"totalComments": totalComments - 1});
+            return;
+          }
+        });
+      });
+    } catch (e) {
+      print("some error occured $e");
+    }
+
+  }
+
+  @override
+  Future<void> likeComment(CommentEntity comment) async {
+    final commentCollection = firebaseFirestore.collection(FirebaseConst.posts).doc(comment.postId).collection(FirebaseConst.comment);
+    final currentUid = await getCurrentUid();
+
+    final commentRef = await commentCollection.doc(comment.commentId).get();
+
+    if (commentRef.exists) {
+      List likes = commentRef.get("likes");
+      if (likes.contains(currentUid)) {
+        commentCollection.doc(comment.commentId).update({
+          "likes": FieldValue.arrayRemove([currentUid])
+        });
+      } else {
+        commentCollection.doc(comment.commentId).update({
+          "likes": FieldValue.arrayUnion([currentUid])
+        });
+      }
+
+    }
+
+
+  }
+
+  @override
+  Stream<List<CommentEntity>> readComments(String postId) {
+    final commentCollection = firebaseFirestore.collection(FirebaseConst.posts).doc(postId).collection(FirebaseConst.comment).orderBy("createAt", descending: true);
+    return commentCollection.snapshots().map((querySnapshot) => querySnapshot.docs.map((e) => CommentModel.fromSnapshot(e)).toList());
+  }
+
+  @override
+  Future<void> updateComment(CommentEntity comment) async {
+    final commentCollection = firebaseFirestore.collection(FirebaseConst.posts).doc(comment.postId).collection(FirebaseConst.comment);
+
+    Map<String, dynamic> commentInfo = Map();
+
+    if (comment.description != "" && comment.description != null) commentInfo["description"] = comment.description;
+
+    commentCollection.doc(comment.commentId).update(commentInfo);
+  }
+
+
 
 }

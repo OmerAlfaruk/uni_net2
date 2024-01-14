@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:uni_link/constant/color.dart';
 import 'package:uni_link/features/domain/entities/user/user_entity.dart';
 import 'package:uni_link/features/presentation/cubit/auth/auth_cubit.dart';
+import 'package:uni_link/features/presentation/pages/app/settings/settings.dart';
 import 'package:uni_link/features/presentation/pages/main/profile/widget/profile_widget.dart';
 
 import 'edit_profile_page.dart';
@@ -20,21 +21,62 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          "${currentUser.name}",
+          "${currentUser.username}",
           style: TextStyle(color: oPrimaryColor),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: InkWell(
-              onTap: () {
-                _openBottomModalSheet(context:context);
-              },
-              child: const Icon(
-                Icons.menu,
-                color: oPrimaryColor,
-              ),),
-          )
+          PopupMenuButton(
+           iconColor: oPrimaryColor,
+
+            // add icon, by default "3 dot" icon
+            // icon: Icon(Icons.book)
+              itemBuilder: (context){
+                return [
+                  PopupMenuItem(
+
+                    child:Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(()=>EditProfilePage(currentUser:currentUser,));
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage()));
+                        },
+                        child: Text(
+                          "Edit Profile",
+                          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: oPrimaryColor),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  PopupMenuItem(
+
+                    child: GestureDetector(
+                      onTap:()=>Get.to(()=>SettingsScreen()),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Text("Settings",style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: oPrimaryColor),),
+                      ),
+                    ),
+                  ),
+
+                  PopupMenuItem(
+
+                    child: GestureDetector(
+                      onTap: (){BlocProvider.of<AuthCubit>(context).loggedOut();},
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(
+                          "Logout",
+                          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: oPrimaryColor),
+                        ),
+                      ),
+                    ),
+                  ),
+                ];
+              }
+          ),
+
         ],
       ),
       body: Column(children: [
@@ -43,6 +85,7 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
+
 
   _openBottomModalSheet({required BuildContext context,}) {
     return showModalBottomSheet(context: context, builder: (context) {
@@ -76,7 +119,7 @@ class ProfilePage extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: GestureDetector(
                     onTap: () {
-                     Get.to(()=>EditProfilePage());
+                     Get.to(()=>EditProfilePage(currentUser:currentUser,));
                       // Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage()));
                     },
                     child: Text(
