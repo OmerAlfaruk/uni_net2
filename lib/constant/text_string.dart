@@ -78,6 +78,64 @@ const String menu1='Settings';
 const String delete='Delete';
 const String joined='Joined';
 const String joinedAt='31 october 2023';
+///This class contains all the app text in string formats
+
+  // -- GLOBAL Texts
+
+  // -- OnBoarding Texts
+  // -- GLOBAL Texts
+  const String and = "and";
+  const String skip = "Skip";
+  const String done = "Done";
+  const String submit = "Submit";
+  const String appName = "T-Store";
+  const String tContinue = "Continue";
+
+
+  // -- OnBoarding Texts
+
+
+  // -- Authentication Forms
+  const String firstName = "First Name";
+  const String lastName = "Last Name";
+
+  const String newPassword = "New Password";
+  const String username = "Username";
+  const String phoneNo = "Phone Number";
+  const String rememberMe = "Remember Me";
+  const String signIn = "Sign In";
+  const String createAccount = "Create Account";
+  const String orSignInWith = "or sign in with";
+  const String orSignUpWith = "or sign up with";
+  const String iAgreeTo = "I agree to";
+  const String privacyPolicy = "Privacy Policy";
+  const String termsOfUse = "Terms of use";
+  const String verificationCode = "verificationCode";
+  const String resendEmail = "Resend Email";
+  const String resendEmailIn = "Resend email in";
+
+
+  // -- Authentication Headings
+  const String loginTitle = "Welcome back,";
+  const String loginSubTitle = "Discover Limitless Choices and Unmatched Convenience.";
+  const String signupTitle = "Let’s create your account";
+ const String changeYourPasswordTitle = "Password Reset Email Sent";
+  const String changeYourPasswordSubTitle = "Your Account Security is Our Priority! We've Sent You a Secure Link to Safely Change Your Password and Keep Your Account Protected.";
+  const String confirmEmail = "Verify your email address!";
+  const String confirmEmailSubTitle = "Congratulations! Your Account Awaits: Verify Your Email to Start Shopping and Experience a World of Unrivaled Deals and Personalized Offers.";
+  const String emailNotReceivedMessage = "Didn’t get the email? Check your junk/spam or resend it.";
+  const String yourAccountCreatedTitle = "Your account successfully created!";
+  const String yourAccountCreatedSubTitle = "Welcome to Your Ultimate Shopping Destination: Your Account is Created, Unleash the Joy of Seamless Online Shopping!";
+
+
+  // -- Product
+  const String popularProducts = "Popular Products";
+
+  // -- Home
+  const String homeAppbarTitle = "Good day for shopping";
+  const String homeAppbarSubTitle = "Omer Kamil";
+
+
 
 
 

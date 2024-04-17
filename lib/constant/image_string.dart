@@ -3,15 +3,13 @@ const String onBoardingImage1='assets/images/onBoarding/onBoarding1.png';
  const String onBoardingImage2='assets/images/onBoarding/onBoarding2.png';
  const String onBoardingImage3='assets/images/onBoarding/onBoarding3.png';
 
- const String tOnBoardingImage1 = "assets/images/onBoarding/onboard3.png";
- const String tOnBoardingImage2 = "assets/images/onBoarding/onboard4.png";
- const String tOnBoardingImage4 = "assets/images/onBoarding/onboard1.png";
- const String tOnBoardingImage3 = "assets/images/onBoarding/onboard2.png";
+
 
  //welcome screen
  const welcomeScreenImage='assets/images/welcome/welcome.png';
  const appLogo='assets/images/logo/applogo.png';
-
+ const String google = "assets/images/logos/google-icon.png";
+ const String facebook = "assets/images/logos/facebook-icon.png";
  const googleLogo='assets/images/logo/google.png';
  const forgetPasswordImage='assets/images/forget_password/forget_password.png';
  const userProfileImage='assets/images/dashboard/user.png';
