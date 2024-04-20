@@ -6,8 +6,8 @@ import 'package:uni_link/common_widget/profile_widget/profile_widget.dart';
 import 'package:uni_link/constant/color.dart';
 import 'package:uni_link/constant/const.dart';
 import 'package:uni_link/features/profile/presentation/pages/profile/widget/profile_form_widget.dart';
-import 'package:uni_link/features/user/user_cubit/user/user_cubit.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/user_cubit.dart';
 
 import 'package:uni_link/injection_container.dart' as di;
 

@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:uni_link/features/user/auth/presentation/manager/auth/auth_cubit.dart';
-import 'package:uni_link/features/user/credential/presentation/pages/credential/sign_in_page.dart';
+import 'package:uni_link/features/user/presentation/manager/auth/auth_cubit.dart';
+import 'package:uni_link/features/user/presentation/pages/login/sign_in_page.dart';
+
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

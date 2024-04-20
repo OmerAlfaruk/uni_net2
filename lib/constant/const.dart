@@ -18,6 +18,7 @@ class PageConst {
 
 class FirebaseConst {
   static const String users = "users";
+  static const String content = "content";
   static const String news = "news";
   static const String posts = "posts";
   static const String comment = "comment";

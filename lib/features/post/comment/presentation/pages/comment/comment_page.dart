@@ -4,7 +4,7 @@ import 'package:uni_link/features/app/domain/entities/app_entity.dart';
 import 'package:uni_link/features/post/comment/presentation/manager/comment/comment_cubit.dart';
 import 'package:uni_link/features/post/comment/presentation/pages/comment/widgets/comment_main_widget.dart';
 import 'package:uni_link/features/post/presentation/manager/post/get_single_post/get_single_post_cubit.dart';
-import 'package:uni_link/features/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
 import 'package:uni_link/injection_container.dart' as di;
 
 

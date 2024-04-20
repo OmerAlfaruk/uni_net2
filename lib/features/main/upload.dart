@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:uni_link/constant/color.dart';
-import 'package:uni_link/features/news/presentaion/pages/news/upload_news.dart';
+import 'package:uni_link/features/news/presentaion/pages/upload_news.dart';
 import 'package:uni_link/features/post/presentation/pages/post/upload_post.dart';
-import 'package:uni_link/features/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
 
-import '../anouncements/presentaion/pages/news/upload_announcements.dart';
+import '../anouncements/presentaion/pages/upload_announcements.dart';
 
 
 

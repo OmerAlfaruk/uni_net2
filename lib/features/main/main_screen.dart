@@ -8,13 +8,12 @@ import 'package:uni_link/features/main/home.dart';
 import 'package:uni_link/features/main/upload.dart';
 import 'package:uni_link/features/nework/presentation/pages/network/network.dart';
 
-import 'package:uni_link/features/news/presentaion/pages/news/upload_news.dart';
 import 'package:uni_link/features/post/presentation/pages/home/post.dart';
 import 'package:uni_link/features/post/presentation/pages/post/upload_post.dart';
 import 'package:uni_link/features/profile/presentation/pages/profile/profile.dart';
 import 'package:uni_link/features/search/presentation/pages/search/search.dart';
 import 'package:uni_link/features/admin/user%20management/presentation/add_single_user.dart';
-import 'package:uni_link/features/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
 
 
 class MainScreen extends StatefulWidget {

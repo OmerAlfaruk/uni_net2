@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:uni_link/constant/color.dart';
 
-/// A widget for displaying an animation loading indicator with optional text and action button
+/// A sub_widget for displaying an animation loading indicator with optional text and action button
 class AnimationLoaderWidget extends StatelessWidget {
 
   /// parameters

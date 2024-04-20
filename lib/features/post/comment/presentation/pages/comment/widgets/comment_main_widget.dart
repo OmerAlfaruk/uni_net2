@@ -11,8 +11,8 @@ import 'package:uni_link/features/post/comment/presentation/manager/comment/comm
 import 'package:uni_link/features/post/comment/presentation/pages/comment/widgets/single_comment_widget.dart';
 import 'package:uni_link/features/post/comment/replay/presentation/manager/replay/replay_cubit.dart';
 import 'package:uni_link/features/post/presentation/manager/post/get_single_post/get_single_post_cubit.dart';
-import 'package:uni_link/features/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
 import 'package:uuid/uuid.dart';
 import 'package:uni_link/injection_container.dart'as di;
 

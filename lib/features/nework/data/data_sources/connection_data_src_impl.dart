@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uni_link/constant/const.dart';
 import 'package:uni_link/features/nework/data/data_sources/connection_data_source.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
 class ConnectionDataSrcImpl implements ConnectionDataSrc{
   final FirebaseFirestore firebaseFirestore;
   final FirebaseAuth firebaseAuth;

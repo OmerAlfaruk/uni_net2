@@ -31,8 +31,8 @@ class OFirebaseException implements Exception {
         return 'The account is already linked with another provider.';
       case 'operation-not-allowed':
         return 'This operation is not allowed. Contact support for assistance.';
-      case 'invalid-credential':
-        return 'The supplied credential is malformed or has expired.';
+      case 'invalid-login':
+        return 'The supplied login is malformed or has expired.';
       case 'invalid-verification-code':
         return 'Invalid verification code. Please enter a valid code.';
       case 'invalid-verification-id':
@@ -45,15 +45,15 @@ class OFirebaseException implements Exception {
         return 'A keychain error occurred. Please check the keychain and try again.';
       case 'internal-error':
         return 'An internal authentication error occurred. Please try again later.';
-      case 'invalid-app-credential':
-        return 'The app credential is invalid. Please provide a valid app credential.';
+      case 'invalid-app-login':
+        return 'The app login is invalid. Please provide a valid app login.';
       case 'user-mismatch':
         return 'The supplied credentials do not correspond to the previously signed-in user.';
       case 'requires-recent-login':
         return 'This operation is sensitive and requires recent authentication. Please log in again.';
       case 'quota-exceeded':
         return 'Quota exceeded. Please try again later.';
-      case 'account-exists-with-different-credential':
+      case 'account-exists-with-different-login':
         return 'An account already exists with the same email but different sign-in credentials.';
       case 'missing-iframe-start':
         return 'The email template is missing the iframe start tag.';
@@ -63,8 +63,8 @@ class OFirebaseException implements Exception {
         return 'The email template is missing the iframe src attribute.';
       case 'auth-domain-config-required':
         return 'The authDomain configuration is required for the action code verification link.';
-      case 'missing-app-credential':
-        return 'The app credential is missing. Please provide valid app credentials.';
+      case 'missing-app-login':
+        return 'The app login is missing. Please provide valid app credentials.';
       case 'session-cookie-expired':
         return 'The Firebase session cookie has expired. Please sign in again.';
       case 'uid-already-exists':
@@ -91,8 +91,8 @@ class OFirebaseException implements Exception {
         return 'The action code has expired. Please request a new action code.';
       case 'invalid-action-code':
         return 'The action code is invalid. Please check the code and try again.';
-      case 'credential-already-in-use':
-        return 'This credential is already associated with a different user account.';
+      case 'login-already-in-use':
+        return 'This login is already associated with a different user account.';
       default:
         return 'An unexpected Firebase error occurred. Please try again.';
     }

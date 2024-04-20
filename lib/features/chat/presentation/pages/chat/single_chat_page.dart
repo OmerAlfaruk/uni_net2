@@ -24,7 +24,7 @@ import 'package:uni_link/features/chat/presentation/widgets/message_replay_previ
 import 'package:uni_link/features/chat/presentation/widgets/message_replay_type_widget.dart';
 import 'package:uni_link/features/chat/presentation/widgets/message_type_widget.dart';
 import 'package:uni_link/features/profile/presentation/manager/get_single_other_user_cubit.dart';
-import 'package:uni_link/features/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
 import 'package:uni_link/storage/storage_provider.dart';
 import 'package:uni_link/utils/device/device_utility.dart';
 import 'package:uni_link/utils/download_service.dart';

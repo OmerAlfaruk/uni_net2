@@ -6,7 +6,7 @@ import 'package:uni_link/features/news/comment/presentation/pages/comment/widget
 import 'package:uni_link/features/news/presentaion/managers/news/get_single_new/get_single_news_cubit.dart';
 import 'package:uni_link/features/news/presentaion/managers/news/get_single_new/get_single_news_cubit.dart';
 import 'package:uni_link/features/post/presentation/manager/post/get_single_post/get_single_post_cubit.dart';
-import 'package:uni_link/features/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
 import 'package:uni_link/injection_container.dart' as di;
 
 

@@ -6,9 +6,9 @@ import 'package:uni_link/features/post/presentation/manager/post/post_cubit.dart
 
 import 'package:uni_link/features/presentation/pages/app/settings/settings.dart';
 import 'package:uni_link/features/profile/presentation/pages/profile/widget/profile_widget.dart';
-import 'package:uni_link/features/user/auth/presentation/manager/auth/auth_cubit.dart';
-import 'package:uni_link/features/user/credential/presentation/pages/credential/sign_in_page.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/presentation/manager/auth/auth_cubit.dart';
+
 import 'package:uni_link/injection_container.dart' as di;
 
 

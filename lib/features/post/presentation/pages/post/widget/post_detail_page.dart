@@ -14,9 +14,6 @@ import 'package:uni_link/features/post/presentation/pages/post/update_post_page.
 import 'package:uni_link/features/user/domain/use_cases/get_current_uid_usecase.dart';
 import 'package:uni_link/injection_container.dart' as di;
 import 'package:intl/intl.dart';
-import 'like_animation_widget.dart';
-
-
 
 class PostDetailMainWidget extends StatefulWidget {
   final String postId;

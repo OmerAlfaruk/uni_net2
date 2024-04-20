@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
-
 
 import 'constant/const.dart';
 import 'features/app/domain/entities/app_entity.dart';
@@ -10,8 +8,9 @@ import 'features/post/comment/presentation/pages/comment/edit_comment_page.dart'
 import 'features/post/comment/replay/presentation/pages/edit_replay_page.dart';
 import 'features/post/comment/replay/domain/entities/replay_entity.dart';
 import 'features/profile/presentation/pages/profile/edit_profile_page.dart';
-import 'features/user/credential/presentation/pages/credential/sign_in_page.dart';
 import 'features/admin/user management/presentation/add_single_user.dart';
+import 'features/user/domain/user_entity/user_entity.dart';
+import 'features/user/presentation/pages/login/sign_in_page.dart';
 
 class OnGenerateRoute {
   static Route<dynamic>? route(RouteSettings settings) {

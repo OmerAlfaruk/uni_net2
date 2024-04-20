@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:uni_link/constant/const.dart';
 import 'package:uni_link/features/user/data/data_sources/user_remote_data_src.dart';
 import 'package:uni_link/features/user/data/models/user_model.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
 import 'package:uni_link/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:uni_link/utils/exceptions/firebase_exceptions.dart';
 import 'package:uni_link/utils/exceptions/platform_exceptions.dart';

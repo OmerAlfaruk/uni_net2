@@ -4,7 +4,7 @@ import 'package:uni_link/common_widget/profile_widget/profile_widget.dart';
 import 'package:uni_link/constant/color.dart';
 import 'package:uni_link/features/chat/presentation/pages/chat/chat_page.dart';
 import 'package:uni_link/features/post/presentation/pages/home/widget/tab_bar.dart';
-import 'package:uni_link/features/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
 
 import 'contact_page.dart';
 

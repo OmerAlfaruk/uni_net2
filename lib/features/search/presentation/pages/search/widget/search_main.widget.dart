@@ -10,8 +10,8 @@ import 'package:uni_link/features/post/presentation/manager/post/post_cubit.dart
 import 'package:uni_link/features/post/presentation/pages/post/post_detail_page.dart';
 import 'package:uni_link/features/profile/presentation/pages/single_user_profile_page.dart';
 import 'package:uni_link/features/search/presentation/pages/search/widget/search_wiget.dart';
-import 'package:uni_link/features/user/user_cubit/user/user_cubit.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/user_cubit.dart';
 
 class SearchMainWidget extends StatefulWidget {
 

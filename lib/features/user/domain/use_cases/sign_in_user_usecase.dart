@@ -4,7 +4,7 @@
 
 import 'package:uni_link/features/app/domain/repositories/firebase_repository.dart';
 import 'package:uni_link/features/user/domain/repositories/user_repository.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
 
 class SignInUserUseCase {
   final UserRepository repository;

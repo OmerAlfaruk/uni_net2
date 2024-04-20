@@ -7,8 +7,8 @@ import 'package:uni_link/features/nework/presentation/pages/network/widgets/sing
 import 'package:uni_link/features/presentation/widgets/button_container_widget.dart';
 import 'package:uni_link/features/profile/presentation/pages/single_user_profile_page.dart';
 import 'package:uni_link/features/user/domain/use_cases/get_current_uid_usecase.dart';
-import 'package:uni_link/features/user/user_cubit/user/user_cubit.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/user_cubit.dart';
 import 'package:uni_link/injection_container.dart'as di;
 
 class NetworkMainWidget extends StatefulWidget {

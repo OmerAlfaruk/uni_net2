@@ -11,7 +11,7 @@ import 'package:uni_link/features/news/comment/replay/presentation/widgets/singl
 
 import 'package:uni_link/features/presentation/widgets/form_container_widget.dart';
 import 'package:uni_link/features/user/domain/use_cases/get_current_uid_usecase.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
 import 'package:uni_link/injection_container.dart' as di;
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';

@@ -21,7 +21,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSrc{
 
   @override
   Future<void> createPost(PostEntity post) async {
-    final postCollection = firebaseFirestore.collection(FirebaseConst.posts);
+    final postCollection =  firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.posts).collection(FirebaseConst.posts);
 
     final newPost = PostModel(
         userProfileUrl: post.userProfileUrl,
@@ -65,7 +65,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSrc{
   Future<void> deletePost( PostEntity post) async {
     final currentUserId=firebaseAuth.currentUser!.uid;
 
-    final postCollection = firebaseFirestore.collection(FirebaseConst.posts);
+       final postCollection =  firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.posts).collection(FirebaseConst.posts);
 
     try {
 
@@ -87,7 +87,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSrc{
 
   @override
   Future<void> likePost(PostEntity post) async {
-    final postCollection = firebaseFirestore.collection(FirebaseConst.posts);
+       final postCollection =  firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.posts).collection(FirebaseConst.posts);
     final currentUid = await getCurrentUid();
     final postRef = await postCollection.doc(post.postId).get();
 
@@ -110,19 +110,19 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSrc{
 
   @override
   Stream<List<PostEntity>> readPosts(PostEntity post) {
-    final postCollection = firebaseFirestore.collection(FirebaseConst.posts).orderBy("createAt", descending: true);
+    final postCollection =  firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.posts).collection(FirebaseConst.posts).orderBy("createAt", descending: true);
     return postCollection.snapshots().map((querySnapshot) => querySnapshot.docs.map((e) => PostModel.fromSnapshot(e)).toList());
   }
 
   @override
   Stream<List<PostEntity>> readSinglePost(String postId) {
-    final postCollection = firebaseFirestore.collection(FirebaseConst.posts).orderBy("createAt", descending: true).where("postId", isEqualTo: postId);
+    final postCollection =  firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.posts).collection(FirebaseConst.posts).orderBy("createAt", descending: true).where("postId", isEqualTo: postId);
     return postCollection.snapshots().map((querySnapshot) => querySnapshot.docs.map((e) => PostModel.fromSnapshot(e)).toList());
   }
 
   @override
   Future<void> updatePost(PostEntity post) async {
-    final postCollection = firebaseFirestore.collection(FirebaseConst.posts);
+       final postCollection =  firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.posts).collection(FirebaseConst.posts);
     Map<String, dynamic> postInfo = Map();
 
     if (post.description != "" && post.description != null) postInfo['description'] = post.description;

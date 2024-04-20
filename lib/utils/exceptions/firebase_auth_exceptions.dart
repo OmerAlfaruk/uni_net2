@@ -33,11 +33,11 @@ class OFirebaseAuthException implements Exception {
         return 'The account is already linked with another provider.';
       case 'requires-recent-login':
         return 'This operation is sensitive and requires recent authentication. Please log in again.';
-      case 'credential-already-in-use':
-        return 'This credential is already associated with a different user account.';
+      case 'login-already-in-use':
+        return 'This login is already associated with a different user account.';
       case 'user-mismatch':
         return 'The supplied credentials do not correspond to the previously signed in user.';
-      case 'account-exists-with-different-credential':
+      case 'account-exists-with-different-login':
         return 'An account already exists with the same email but different sign-in credentials.';
       case 'operation-not-allowed':
         return 'This operation is not allowed. Contact support for assistance.';
@@ -51,8 +51,8 @@ class OFirebaseAuthException implements Exception {
         return 'The user\'s token has expired, and authentication is required. Please sign in again.';
       case 'user-not-found':
         return 'No user found for the given email or UID.';
-      case 'invalid-credential':
-        return 'The supplied credential is malformed or has expired.';
+      case 'invalid-login':
+        return 'The supplied login is malformed or has expired.';
       case 'wrong-password':
         return 'The password is invalid. Please check your password and try again.';
       case 'user-token-revoked':
@@ -71,10 +71,10 @@ class OFirebaseAuthException implements Exception {
         return 'The email template is missing the iframe src attribute.';
       case 'auth-domain-config-required':
         return 'The authDomain configuration is required for the action code verification link.';
-      case 'missing-app-credential':
-        return 'The app credential is missing. Please provide valid app credentials.';
-      case 'invalid-app-credential':
-        return 'The app credential is invalid. Please provide a valid app credential.';
+      case 'missing-app-login':
+        return 'The app login is missing. Please provide valid app credentials.';
+      case 'invalid-app-login':
+        return 'The app login is invalid. Please provide a valid app login.';
       case 'session-cookie-expired':
         return 'The Firebase session cookie has expired. Please sign in again.';
       case 'uid-already-exists':
@@ -89,8 +89,8 @@ class OFirebaseAuthException implements Exception {
         return 'The provided user\'s token has a mismatch with the authenticated user\'s user ID.';
       case 'web-storage-unsupported':
         return 'Web storage is not supported or is disabled.';
-      case 'invalid-credential':
-        return 'The supplied credential is invalid. Please check the credential and try again.';
+      case 'invalid-login':
+        return 'The supplied login is invalid. Please check the login and try again.';
       case 'app-not-authorized':
         return 'The app is not authorized to use Firebase Authentication with the provided API key.';
       case 'keychain-error':

@@ -13,9 +13,9 @@ import 'package:uni_link/features/post/presentation/pages/post/post_detail_page.
 import 'package:uni_link/features/presentation/widgets/button_container_widget.dart';
 import 'package:uni_link/features/profile/presentation/manager/get_single_other_user_cubit.dart';
 import 'package:uni_link/features/user/domain/use_cases/get_current_uid_usecase.dart';
-import 'package:uni_link/features/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
-import 'package:uni_link/features/user/user_cubit/user/user_cubit.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/user_cubit.dart';
 import 'package:uni_link/injection_container.dart' as di;
 
 class SingleUserProfileMainWidget extends StatefulWidget {

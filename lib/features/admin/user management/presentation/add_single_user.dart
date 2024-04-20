@@ -9,15 +9,12 @@ import 'package:uni_link/constant/color.dart';
 import 'package:uni_link/constant/const.dart';
 import 'package:uni_link/features/presentation/widgets/button_container_widget.dart';
 import 'package:uni_link/features/presentation/widgets/form_container_widget.dart';
-import 'package:uni_link/features/user/auth/presentation/manager/auth/auth_cubit.dart';
-import 'package:uni_link/features/user/credential/presentation/manager/credential/credential_cubit.dart';
-import 'package:uni_link/features/user/credential/presentation/pages/credential/sign_in_page.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/presentation/manager/auth/auth_cubit.dart';
+import 'package:uni_link/features/user/presentation/manager/credential/credential_cubit.dart';
 import 'package:uni_link/utils/popups/loaders.dart';
 
 import '../../../../utils/validators/validator.dart';
-import '../../../user/credential/presentation/widgets/terms and condition.dart';
-import '../../../user/credential/presentation/widgets/widget_controller/terms_and_condition_conroller.dart';
 
 
 class AddSingleUserPage extends StatefulWidget {
@@ -30,7 +27,7 @@ GlobalKey<FormState> signupFormKey=GlobalKey<FormState>();
 
 
 class _AddSingleUserPageState extends State<AddSingleUserPage> {
-  final PrivacyController=TermsAndConditionController.instance;
+
   String dropdownvalue = 'Arbaminch University';
 
   var items = [
@@ -247,10 +244,6 @@ class _AddSingleUserPageState extends State<AddSingleUserPage> {
                   text: "Add User",
                   onTapListener: () {
                     if(signupFormKey.currentState!.validate()){
-                      if(!PrivacyController.privacyPoly.value){
-                        Loader.warningSnackBar(title: "You have to accept privacy policy");
-                        return;
-                      }
                     _signUpUser();}
                   },
                 ),

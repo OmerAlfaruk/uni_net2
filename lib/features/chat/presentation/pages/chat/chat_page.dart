@@ -10,7 +10,7 @@ import 'package:uni_link/features/chat/presentation/manager/cubit/chat/chat_cubi
 import 'package:uni_link/features/chat/presentation/pages/chat/single_chat_page.dart';
 
 import 'package:intl/intl.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
 
 class ChatPage extends StatefulWidget {
   final UserEntity currentUser;

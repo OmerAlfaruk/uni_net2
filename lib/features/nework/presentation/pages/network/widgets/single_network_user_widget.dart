@@ -4,9 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uni_link/constant/color.dart';
 import 'package:uni_link/features/presentation/widgets/button_container_widget.dart';
 import 'package:uni_link/features/profile/presentation/manager/get_single_other_user_cubit.dart';
-import 'package:uni_link/features/user/user_cubit/user/user_cubit.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
-
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/presentation/manager/user/user_cubit/user/user_cubit.dart';
 import '../../../../../../constant/image_string.dart';
 
 

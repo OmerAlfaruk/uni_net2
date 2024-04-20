@@ -10,6 +10,7 @@ import 'package:uni_link/features/user/data/data_sources/user_remote_data_src.da
 import 'package:uni_link/features/user/data/data_sources/user_remote_data_src_impl.dart';
 import 'package:uni_link/features/user/data/repositories/user_repository_impl.dart';
 import 'package:uni_link/features/user/domain/repositories/user_repository.dart';
+import 'package:uni_link/features/user/presentation/manager/credential/credential_cubit.dart';
 import 'features/anouncements/data/data_sources/announcement_remote_data_src.dart';
 import 'features/anouncements/data/data_sources/announcement_remote_data_src_impl.dart';
 import 'features/anouncements/data/repositories/announcements_repository_impl.dart';
@@ -19,8 +20,8 @@ import 'features/anouncements/domain/use_cases/like_announcement_usecase.dart';
 import 'features/anouncements/domain/use_cases/read_announcement_usecase.dart';
 import 'features/anouncements/domain/use_cases/read_single_annoncements_usecase.dart';
 import 'features/anouncements/domain/use_cases/update_announcements_usecase.dart';
-import 'features/anouncements/presentaion/managers/news/announcements_cubit.dart';
-import 'features/anouncements/presentaion/managers/news/get_single_announcement/get_single_announcement_cubit.dart';
+import 'features/anouncements/presentaion/managers/announcements_cubit.dart';
+import 'features/anouncements/presentaion/managers/get_single_announcement/get_single_announcement_cubit.dart';
 import 'features/chat/data/data_sources/chat_remote_data_resource.dart';
 import 'features/chat/data/data_sources/chat_remote_data_resource_implmentation.dart';
 import 'features/chat/data/repositories/chat_repository_impl.dart';
@@ -101,8 +102,6 @@ import 'features/post/presentation/manager/post/get_single_post/get_single_post_
 import 'features/post/presentation/manager/post/post_cubit.dart';
 import 'features/user/domain/use_cases/get_other_single_user.dart';
 import 'features/profile/presentation/manager/get_single_other_user_cubit.dart';
-import 'features/user/auth/presentation/manager/auth/auth_cubit.dart';
-import 'features/user/credential/presentation/manager/credential/credential_cubit.dart';
 import 'features/user/domain/use_cases/create_user_usecase.dart';
 import 'features/user/domain/use_cases/get_current_uid_usecase.dart';
 import 'features/user/domain/use_cases/get_single_user_usecase.dart';
@@ -112,8 +111,9 @@ import 'features/user/domain/use_cases/sign_in_user_usecase.dart';
 import 'features/user/domain/use_cases/sign_out_usecase.dart';
 import 'features/user/domain/use_cases/sign_up_user_usecase.dart';
 import 'features/user/domain/use_cases/update_user_usecase.dart';
-import 'features/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
-import 'features/user/user_cubit/user/user_cubit.dart';
+import 'features/user/presentation/manager/auth/auth_cubit.dart';
+import 'features/user/presentation/manager/user/user_cubit/user/get_single_user/get_single_user_cubit.dart';
+import 'features/user/presentation/manager/user/user_cubit/user/user_cubit.dart';
 
 final sl = GetIt.instance;
 Future<void> init() async {

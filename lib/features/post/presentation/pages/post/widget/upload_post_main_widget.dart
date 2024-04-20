@@ -9,7 +9,7 @@ import 'package:uni_link/constant/const.dart';
 import 'package:uni_link/features/post/domain/use_cases/upload_image_to_storage_usecase.dart';
 import 'package:uni_link/features/post/domain/entities/post_entity.dart';
 import 'package:uni_link/features/profile/presentation/pages/profile/widget/profile_form_widget.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
 import 'package:uuid/uuid.dart';
 import 'package:uni_link/injection_container.dart' as di;
 

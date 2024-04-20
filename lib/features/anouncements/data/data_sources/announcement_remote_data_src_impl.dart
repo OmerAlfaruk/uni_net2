@@ -23,7 +23,7 @@ class AnnouncementsRemoteDataSourceImpl implements AnnouncementsRemoteDataSrc{
 
   @override
   Future<void> createAnnouncements(AnnouncementsEntity announcements) async {
-    final announcementsCollection = firebaseFirestore.collection(FirebaseConst.announcements);
+    final announcementsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.announcements).collection(FirebaseConst.announcements);
 
     final newAnnouncements = AnnouncementsModel(
         userProfileUrl: announcements.userProfileUrl,
@@ -67,7 +67,8 @@ class AnnouncementsRemoteDataSourceImpl implements AnnouncementsRemoteDataSrc{
   Future<void> deleteAnnouncements( AnnouncementsEntity announcements) async {
     final currentUserId=firebaseAuth.currentUser!.uid;
 
-    final announcementsCollection = firebaseFirestore.collection(FirebaseConst.announcements);
+     final announcementsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.announcements).collection(FirebaseConst.announcements);
+
 
     try {
       if(announcements.creatorUid==currentUserId){
@@ -91,7 +92,8 @@ class AnnouncementsRemoteDataSourceImpl implements AnnouncementsRemoteDataSrc{
 
   @override
   Future<void> likeAnnouncements(AnnouncementsEntity announcements) async {
-    final announcementsCollection = firebaseFirestore.collection(FirebaseConst.announcements);
+     final announcementsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.announcements).collection(FirebaseConst.announcements);
+
     final currentUid = await getCurrentUid();
     final announcementsRef = await announcementsCollection.doc(announcements.announcementsId).get();
 
@@ -114,19 +116,22 @@ class AnnouncementsRemoteDataSourceImpl implements AnnouncementsRemoteDataSrc{
 
   @override
   Stream<List<AnnouncementsEntity>> readAnnouncements(AnnouncementsEntity announcements) {
-    final announcementsCollection = firebaseFirestore.collection(FirebaseConst.announcements).orderBy("createAt", descending: true);
+    final announcementsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.announcements).collection(FirebaseConst.announcements)
+.orderBy("createAt", descending: true);
     return announcementsCollection.snapshots().map((querySnapshot) => querySnapshot.docs.map((e) => AnnouncementsModel.fromSnapshot(e)).toList());
   }
 
   @override
   Stream<List<AnnouncementsEntity>> readSingleAnnouncements(String announcementsId) {
-    final announcementsCollection = firebaseFirestore.collection(FirebaseConst.announcements).orderBy("createAt", descending: true).where("announcementsId", isEqualTo: announcementsId);
+    final announcementsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.announcements).collection(FirebaseConst.announcements).
+orderBy("createAt", descending: true).where("announcementsId", isEqualTo: announcementsId);
     return announcementsCollection.snapshots().map((querySnapshot) => querySnapshot.docs.map((e) => AnnouncementsModel.fromSnapshot(e)).toList());
   }
 
   @override
   Future<void> updateAnnouncements(AnnouncementsEntity announcements) async {
-    final announcementsCollection = firebaseFirestore.collection(FirebaseConst.announcements);
+     final announcementsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.announcements).collection(FirebaseConst.announcements);
+
     Map<String, dynamic> announcementsInfo = Map();
 
     if (announcements.description != "" && announcements.description != null) announcementsInfo['description'] = announcements.description;

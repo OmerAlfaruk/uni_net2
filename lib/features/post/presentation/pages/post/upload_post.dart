@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:uni_link/features/post/presentation/manager/post/post_cubit.dart';
 import 'package:uni_link/features/post/presentation/pages/post/widget/upload_post_main_widget.dart';
-import 'package:uni_link/features/user/user_entity/user_entity.dart';
+import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
 import 'package:uni_link/injection_container.dart' as di;
 
 class UploadPostPage extends StatelessWidget {

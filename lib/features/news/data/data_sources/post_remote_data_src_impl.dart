@@ -21,7 +21,7 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSrc{
 
   @override
   Future<void> createNews(NewsEntity news) async {
-    final newsCollection = firebaseFirestore.collection(FirebaseConst.news);
+    final newsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.news).collection(FirebaseConst.news);
 
     final newNews = NewsModel(
         userProfileUrl: news.userProfileUrl,
@@ -65,7 +65,7 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSrc{
   Future<void> deleteNews( NewsEntity news) async {
     final currentUserId=firebaseAuth.currentUser!.uid;
 
-    final newsCollection = firebaseFirestore.collection(FirebaseConst.news);
+    final newsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.news).collection(FirebaseConst.news);
 
     try {
       if(news.creatorUid==currentUserId){
@@ -89,7 +89,7 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSrc{
 
   @override
   Future<void> likeNews(NewsEntity news) async {
-    final newsCollection = firebaseFirestore.collection(FirebaseConst.news);
+    final newsCollection =firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.news).collection(FirebaseConst.news);
     final currentUid = await getCurrentUid();
     final newsRef = await newsCollection.doc(news.newsId).get();
 
@@ -112,19 +112,19 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSrc{
 
   @override
   Stream<List<NewsEntity>> readNews(NewsEntity news) {
-    final newsCollection = firebaseFirestore.collection(FirebaseConst.news).orderBy("createAt", descending: true);
+    final newsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.news).collection(FirebaseConst.news).orderBy("createAt", descending: true);
     return newsCollection.snapshots().map((querySnapshot) => querySnapshot.docs.map((e) => NewsModel.fromSnapshot(e)).toList());
   }
 
   @override
   Stream<List<NewsEntity>> readSingleNews(String newsId) {
-    final newsCollection = firebaseFirestore.collection(FirebaseConst.news).orderBy("createAt", descending: true).where("newsId", isEqualTo: newsId);
+    final newsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.news).collection(FirebaseConst.news).orderBy("createAt", descending: true).where("newsId", isEqualTo: newsId);
     return newsCollection.snapshots().map((querySnapshot) => querySnapshot.docs.map((e) => NewsModel.fromSnapshot(e)).toList());
   }
 
   @override
   Future<void> updateNews(NewsEntity news) async {
-    final newsCollection = firebaseFirestore.collection(FirebaseConst.news);
+    final newsCollection = firebaseFirestore.collection(FirebaseConst.content).doc(FirebaseConst.news).collection(FirebaseConst.news);
     Map<String, dynamic> newsInfo = Map();
 
     if (news.description != "" && news.description != null) newsInfo['description'] = news.description;
