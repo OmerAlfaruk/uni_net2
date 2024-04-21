@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:uni_link/common_widget/profile_widget/profile_widget.dart';
 import 'package:uni_link/constant/color.dart';
 import 'package:uni_link/constant/const.dart';
-import 'package:uni_link/features/nework/presentation/pages/network/widgets/network_main_widget.dart';
-import 'package:uni_link/features/nework/presentation/pages/network/widgets/single_network_user_widget.dart';
-import 'package:uni_link/features/profile/presentation/manager/get_single_other_user_cubit.dart';
 import 'package:uni_link/features/profile/presentation/pages/single_user_profile_page.dart';
 import 'package:uni_link/features/user/domain/use_cases/get_single_user_usecase.dart';
 import 'package:uni_link/features/user/domain/user_entity/user_entity.dart';
