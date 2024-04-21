@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:uni_link/features/presentation/pages/main/post/update_post_page.dart';
 
 import 'constant/const.dart';
-import 'features/domain/entities/user/user_entity.dart';
-import 'features/presentation/pages/credential/sign_in_page.dart';
-import 'features/presentation/pages/credential/sign_up_page.dart';
-import 'features/presentation/pages/main/profile/edit_profile_page.dart';
+import 'features/app/domain/entities/app_entity.dart';
+import 'features/post/comment/domain/entities/comment_entity.dart';
+import 'features/post/comment/presentation/pages/comment/comment_page.dart';
+import 'features/post/comment/presentation/pages/comment/edit_comment_page.dart';
+import 'features/post/comment/replay/presentation/pages/edit_replay_page.dart';
+import 'features/post/comment/replay/domain/entities/replay_entity.dart';
+import 'features/profile/presentation/pages/profile/edit_profile_page.dart';
+import 'features/admin/user management/presentation/add_single_user.dart';
+import 'features/user/domain/user_entity/user_entity.dart';
+import 'features/user/presentation/pages/login/sign_in_page.dart';
 
 class OnGenerateRoute {
   static Route<dynamic>? route(RouteSettings settings) {
@@ -14,51 +19,78 @@ class OnGenerateRoute {
     switch(settings.name) {
       case PageConst.editProfilePage: {
         if (args is UserEntity) {
-          return routeBuilder(EditProfilePage(currentUser:args,));
+          return routeBuilder(EditProfilePage(currentUser: args,));
 
         } else {
           return routeBuilder(NoPageFound());
         }
 
       }
-      case PageConst.updatePostPage: {
-
-          return routeBuilder(EditPostPage());
-
-
-      }
+      // case PageConst.updatePostPage: {
+      //   if (args is PostEntity) {
+      //     return routeBuilder(EditPostPage(post: args,));
+      //
+      //   }
+      //else {
+       //   return routeBuilder(NoPageFound());
+      //  }
+      //}
       case PageConst.updateCommentPage: {
+        if (args is CommentEntity) {
+          return routeBuilder(EditCommentPage(comment: args,));
 
-
-
-
+        } else {
+          return routeBuilder(NoPageFound());
+        }
       }
       case PageConst.updateReplayPage: {
+        if (args is ReplayEntity) {
+          return routeBuilder(EditReplayPage(replay: args,));
 
+        } else {
+          return routeBuilder(NoPageFound());
+        }
       }
       case PageConst.commentPage: {
-
-
+        if (args is AppEntity) {
+          return routeBuilder(CommentPage(appEntity: args,));
+        }
         return routeBuilder(NoPageFound());
       }
-      case PageConst.postDetailPage: {
 
-      }
-      case PageConst.singleUserProfilePage: {
-
-      }
-
-
-
+      // case PageConst.postDetailPage: {
+      //   if (args is String) {
+      //     return routeBuilder(PostDetailPage(postId: args,));
+      //   }
+      //   return routeBuilder(NoPageFound());
+      // }
+      //case PageConst.singleUserProfilePage: {
+      //   if (args is String) {
+      //     return routeBuilder(SingleUserProfilePage(otherUserId: args,));
+      //   }
+      //   return routeBuilder(NoPageFound());
+      // }
+      // case PageConst.followingPage: {
+      //   if (args is UserEntity) {
+      //     return routeBuilder(FollowingPage(user: args,));
+      //   }
+      //   return routeBuilder(NoPageFound());
+      // }
+      // case PageConst.followersPage: {
+      //   if (args is UserEntity) {
+      //     return routeBuilder(FollowersPage(user: args,));
+      //   }
+      //   return routeBuilder(NoPageFound());
+      // }
 
       case PageConst.signInPage: {
         return routeBuilder(SignInPage());
       }
       case PageConst.signUpPage: {
-        return routeBuilder(SignUpPage());
+        return routeBuilder(AddSingleUserPage());
       }
       case PageConst.signUpPage: {
-        return routeBuilder(SignUpPage());
+        return routeBuilder(AddSingleUserPage());
       }
       default: {
         NoPageFound();
@@ -66,9 +98,6 @@ class OnGenerateRoute {
     }
     return null;
   }
-}
-
-class PostEntity {
 }
 
 dynamic routeBuilder(Widget child) {
@@ -88,4 +117,6 @@ class NoPageFound extends StatelessWidget {
     );
   }
 }
+
+
 

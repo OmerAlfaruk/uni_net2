@@ -1,36 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uni_link/constant/color.dart';
-import 'package:uni_link/features/domain/entities/user/user_entity.dart';
-import 'package:uni_link/features/presentation/pages/main/chat/chat_page.dart';
-import 'package:uni_link/features/presentation/pages/main/event_screen/event_detail_page.dart';
-import 'package:uni_link/features/presentation/pages/main/event_screen/event_page.dart';
-import 'package:uni_link/features/presentation/pages/main/notifications/notifications.dart';
-import 'package:uni_link/features/presentation/pages/main/profile/profile.dart';
+import 'package:uni_link/features/chat/presentation/pages/chat/chat_page.dart';
+import 'package:uni_link/features/post/domain/entities/post_entity.dart';
+import 'package:uni_link/features/event/presentation/pages/event_screen/event_page.dart';
+import 'package:uni_link/features/notificatio/presentation/pages/notifications/notifications.dart';
+
+
+import '../../../common_widget/profile_widget/profile_widget.dart';
 
 PreferredSizeWidget appBarWidget(
-  BuildContext context, {
+  BuildContext context, {String ? imageUrl,
   VoidCallback? onLeadingTapClickListener,
+      VoidCallback? onTap,
   String? title,
   bool? isChatPage,
 }) {
-  final UserEntity currentUser;
+
   return AppBar(
     elevation: 0,
     backgroundColor: Colors.transparent,
     leading: GestureDetector(
       onTap: onLeadingTapClickListener,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-            onTap: () {}, //()=>Get.to(()=>ProfilePage(,)),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset(
-                  "assets/images/general/profile_1.jpeg",
-                ))),
-      ),
-    ),
+   child: ClipRRect(
+       borderRadius: BorderRadius.circular(15),
+       child: profileWidget(
+
+   ),
+
+    ),),
     title: isChatPage == false
         ? Container(
             width: double.infinity,
@@ -68,12 +66,9 @@ PreferredSizeWidget appBarWidget(
                 ),
                 AppBarActionWidget(
                   icon: Icons.message_outlined,
-                  onPressed: () {
-                    Get.to(() => const ChatPage());
-                  }, ammount: '13',
+                  onPressed:onTap, ammount: '13',
                 ),
-              ],
-            )
+              ])
           : const Row(
               children: [
                 Icon(
